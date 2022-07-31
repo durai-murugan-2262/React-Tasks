@@ -1,7 +1,9 @@
 import React from "react";
-
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 function Dashboard(props) {
-  console.log(props.data);
+  console.log(props.data.data);
   return (
     <>
       <div id="content-wrapper" className="d-flex flex-column">
@@ -33,7 +35,7 @@ function Dashboard(props) {
                           Earnings (Monthly)
                         </div>
                         <div className="h5 mb-0 font-weight-bold text-gray-800">
-                          {props.data.monthly}
+                          {props.data.data.monthly}
                         </div>
                       </div>
                       <div className="col-auto">
@@ -54,7 +56,7 @@ function Dashboard(props) {
                           Earnings (Annual)
                         </div>
                         <div className="h5 mb-0 font-weight-bold text-gray-800">
-                          {props.data.annual}
+                          {props.data.data.annual}
                         </div>
                       </div>
                       <div className="col-auto">
@@ -77,7 +79,7 @@ function Dashboard(props) {
                         <div className="row no-gutters align-items-center">
                           <div className="col-auto">
                             <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                              {props.data.task}%
+                              {props.data.data.task}%
                             </div>
                           </div>
                           <div className="col">
@@ -89,8 +91,8 @@ function Dashboard(props) {
                                 className="progress-bar bg-info"
                                 role="progressbar"
                                 style={{
-                                  width: `${props.data.task}%`,
-                                  "aria-valuenow": props.data.task,
+                                  width: `${props.data.data.task}%`,
+                                  "aria-valuenow": props.data.data.task,
                                   "aria-valuemin": "0",
                                   "aria-valuemax": "100",
                                 }}
@@ -117,7 +119,7 @@ function Dashboard(props) {
                           Pending Requests
                         </div>
                         <div className="h5 mb-0 font-weight-bold text-gray-800">
-                          {props.data.pending}
+                          {props.data.data.pending}
                         </div>
                       </div>
                       <div className="col-auto">
@@ -131,6 +133,47 @@ function Dashboard(props) {
           </div>
         </div>
         {/* <!-- End of Main Content --> */}
+
+        {/* Start of Student details */}
+
+        <div>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Mobile</th>
+                <th>Batch</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              {props.data.students.map((e, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{i + 1}</td>
+                    <td>{e.name}</td>
+                    <td>{e.email}</td>
+                    <td>{e.mobile}</td>
+                    <td>{e.batch}</td>
+                    <td>
+                      <Link to="edit-student">
+                        <Button variant="primary">Edit</Button>
+                      </Link>
+                      &nbsp;&nbsp;
+                      <Link to="delete-student">
+                        <Button variant="danger">Delete</Button>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </div>
+
+        {/* End of Student details */}
 
         {/* <!-- Footer --> */}
         <footer className="sticky-footer bg-white">

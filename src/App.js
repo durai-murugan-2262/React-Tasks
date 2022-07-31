@@ -1,7 +1,11 @@
 import "./App.css";
 import Sidebar from "./Components/Sidebar";
 import Dashboard from "./Components/Dashboard";
-
+import CreateStudent from "./Components/CreateStudent";
+import EditStudent from "./Components/EditStudent";
+import DeleteStudent from "./Components/DeleteStudent";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 function App() {
   let data = {
     monthly: "Rs. 40,000",
@@ -9,11 +13,51 @@ function App() {
     task: 50,
     pending: 18,
   };
+  let [students, setStudents] = useState([
+    {
+      name: "Raj",
+      email: "raj@gmail.com",
+      mobile: 9877346282,
+      batch: "B32WE",
+    },
+    {
+      name: "mohan",
+      email: "mohan@gmail.com",
+      mobile: 6832446282,
+      batch: "B34WD",
+    },
+    {
+      name: "siraj",
+      email: "siraj@gmail.com",
+      mobile: 9873200432,
+      batch: "B29WD",
+    },
+    {
+      name: "Gokul",
+      email: "gokul@gmail.com",
+      mobile: 6735246282,
+      batch: "B37WE",
+    },
+  ]);
   return (
     <>
       <div className="main-wrapper">
-        <Sidebar />
-        <Dashboard data={data} />
+        <BrowserRouter>
+          <Sidebar />
+          <Routes>
+            <Route
+              path="dashboard"
+              element={<Dashboard data={{ data, students, setStudents }} />}
+            />
+            <Route path="create-student" element={<CreateStudent />} />
+            <Route path="edit-student" element={<EditStudent />} />
+            <Route path="delete-student" element={<DeleteStudent />} />
+            <Route
+              path="*"
+              element={<Dashboard data={{ data, students, setStudents }} />}
+            />
+          </Routes>
+        </BrowserRouter>
       </div>
     </>
   );
