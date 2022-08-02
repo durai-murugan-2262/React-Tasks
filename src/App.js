@@ -3,9 +3,9 @@ import Sidebar from "./Components/Sidebar";
 import Dashboard from "./Components/Dashboard";
 import CreateStudent from "./Components/CreateStudent";
 import EditStudent from "./Components/EditStudent";
-import DeleteStudent from "./Components/DeleteStudent";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useState } from "react";
+
 function App() {
   let data = {
     monthly: "Rs. 40,000",
@@ -49,9 +49,14 @@ function App() {
               path="dashboard"
               element={<Dashboard data={{ data, students, setStudents }} />}
             />
-            <Route path="create-student" element={<CreateStudent />} />
-            <Route path="edit-student" element={<EditStudent />} />
-            <Route path="delete-student" element={<DeleteStudent />} />
+            <Route
+              path="create-student"
+              element={<CreateStudent data={{ students, setStudents }} />}
+            />
+            <Route
+              path="edit-student/:id"
+              element={<EditStudent data={{ students, setStudents }} />}
+            />
             <Route
               path="*"
               element={<Dashboard data={{ data, students, setStudents }} />}
