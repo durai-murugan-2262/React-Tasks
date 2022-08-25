@@ -5,31 +5,20 @@ import { useNavigate } from "react-router-dom";
 
 function Dashboard(props) {
   let navigate = useNavigate();
-  let handleDelete = (i) => {
+  let currentYear = new Date().getFullYear();
+  let handleDelete = (id) => {
     let students = [...props.data.students];
-    students.splice(i, 1);
+    students.splice(id, 1);
     props.data.setStudents(students);
   };
 
   return (
     <>
-      <div id="content-wrapper" className="d-flex flex-column container-fluid">
+      <div id="content-wrapper" className="d-flex flex-column justify-content-around container-fluid">
         {/* <!-- Main Content --> */}
         <div id="content">
           {/* <!-- Begin Page Content --> */}
           <div className="container-fluid">
-            {/* <!-- Page Heading --> */}
-            <div className="d-sm-flex align-items-center justify-content-between mb-4">
-              <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
-              <a
-                href="#!"
-                className="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"
-              >
-                <i className="fas fa-download fa-sm text-white-50"></i> Generate
-                Report
-              </a>
-            </div>
-
             {/* <!-- Content Row --> */}
             <div className="row">
               {/* <!-- Earnings (Monthly) Card Example --> */}
@@ -91,9 +80,6 @@ function Dashboard(props) {
                           </div>
                           <div className="col">
                             <div className="progress progress-sm mr-2">
-                              {/* <div className="progress-bar bg-info" role="progressbar"
-                                                style={"width": "50%" aria-valuenow="50" aria-valuemin="0"
-                                                aria-valuemax="100"}></div> */}
                               <div
                                 className="progress-bar bg-info"
                                 role="progressbar"
@@ -159,7 +145,7 @@ function Dashboard(props) {
               {props.data.students.map((e, i) => {
                 return (
                   <tr key={i}>
-                    <td>{i + 1}</td>
+                    <td>{i+1}</td>
                     <td>{e.name}</td>
                     <td>{e.email}</td>
                     <td>{e.mobile}</td>
@@ -189,7 +175,7 @@ function Dashboard(props) {
         <footer className="sticky-footer bg-white">
           <div className="container my-auto">
             <div className="copyright text-center my-auto">
-              <span>Copyright &copy; Your Website 2021</span>
+              <span>Copyright &copy; Durai Murugan {currentYear}</span>
             </div>
           </div>
         </footer>
